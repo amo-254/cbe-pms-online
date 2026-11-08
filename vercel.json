@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "flask",
+  "crons": [
+    { "path": "/api/cron/annual-grade-transition", "schedule": "0 0 1 1 *" }
+  ]
+}

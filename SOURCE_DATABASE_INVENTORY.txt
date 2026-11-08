@@ -1,0 +1,20 @@
+CBE PMS source database inventory
+File supplied: cbe_pms.db
+SQLite integrity_check: ok
+Foreign-key check: no violations detected in learner/score and assessment/score references.
+
+Source record counts:
+- learners: 319
+- scores: 4,484
+- assessments: 5
+- teachers: 12
+- users: 13 (1 Administrator, 12 Teachers)
+- teacher_assignments: 55
+- class_teacher_assignments: 6
+- graduating_classes: 0
+- graduating_class_members: 0
+- settings: 9
+
+The database has no learner/teacher reference gaps in the inspected score data.
+The source database's school_logo setting is a local Windows file path, not an uploaded image. Re-upload the logo through the online School Settings page after migration.
+The legacy password_display column contains plaintext temporary credentials in the desktop database. The migration intentionally clears that field while retaining password hashes for login verification and automatic scrypt upgrade.
