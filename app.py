@@ -14,8 +14,18 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.security import generate_password_hash, check_password_hash
 from openpyxl import Workbook, load_workbook
 
-BASE_DIR=os.path.abspath(os.path.dirname(__file__)); INSTANCE=os.path.join(BASE_DIR,'instance'); os.makedirs(INSTANCE,exist_ok=True)
-UPLOADS=os.path.join(INSTANCE,'uploads'); os.makedirs(UPLOADS,exist_ok=True)
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+# Vercel's application directory is read-only.
+if os.environ.get("VERCEL") == "1":
+    INSTANCE = "/tmp/cbe_pms/instance"
+else:
+    INSTANCE = os.path.join(BASE_DIR, "instance")
+
+os.makedirs(INSTANCE, exist_ok=True)
+
+UPLOADS = os.path.join(INSTANCE, "uploads")
+os.makedirs(UPLOADS, exist_ok=True)
 app=Flask(__name__)
 SECRET_KEY=os.environ.get('SECRET_KEY')
 if not SECRET_KEY and (os.environ.get('FLASK_ENV')=='production' or os.environ.get('VERCEL')=='1'): raise RuntimeError('SECRET_KEY must be set in production and on Vercel')
